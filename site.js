@@ -11,6 +11,43 @@
     if (a) conversion("8b8lCKbpnLAdEPCV1I1F");
   });
 
+  // Ukázky prací: kliknutí na auto nebo fotku otevře galerii
+  var lb = document.getElementById("lightbox");
+  if (lb && lb.showModal) {
+    var lbImg = lb.querySelector("img"), lbCap = lb.querySelector("figcaption"), set = [], cur = 0;
+    var show = function (i) {
+      cur = (i + set.length) % set.length;
+      var a = set[cur], img = a.querySelector("img");
+      lbImg.src = a.href; lbImg.alt = img.alt;
+      lbCap.textContent = img.alt + " (" + (cur + 1) + "/" + set.length + ")";
+    };
+    var open = function (key, i) {
+      set = Array.prototype.slice.call(document.querySelectorAll('.work-photo[data-gallery="' + key + '"]'));
+      if (!set.length) return;
+      show(i || 0); lb.showModal();
+    };
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest(".work-photo");
+      if (a) { e.preventDefault(); var g = a.getAttribute("data-gallery"); var all = document.querySelectorAll('.work-photo[data-gallery="' + g + '"]'); open(g, Array.prototype.indexOf.call(all, a)); return; }
+      var b = e.target.closest && e.target.closest(".work-open");
+      if (b) open(b.getAttribute("data-open"), 0);
+    });
+    lb.querySelector(".lb-prev").addEventListener("click", function () { show(cur - 1); });
+    lb.querySelector(".lb-next").addEventListener("click", function () { show(cur + 1); });
+    lb.querySelector(".lb-close").addEventListener("click", function () { lb.close(); });
+    lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+    lb.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") show(cur - 1);
+      if (e.key === "ArrowRight") show(cur + 1);
+    });
+    var sx = null;
+    lb.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener("touchend", function (e) {
+      if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; sx = null;
+      if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1));
+    });
+  }
+
   // Poptávkový formulář (jen na stránkách, kde je)
   var form = document.getElementById("order-form");
   if (!form) return;
