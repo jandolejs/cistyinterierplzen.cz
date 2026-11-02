@@ -13,7 +13,11 @@
   // Konverze: klik na telefon (všechny tel: odkazy)
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest('a[href^="tel:"]');
-    if (a) { conversion("8b8lCKbpnLAdEPCV1I1F"); track("Telefon"); }
+    if (a) {
+      conversion("8b8lCKbpnLAdEPCV1I1F");
+      var where = a.closest("header") ? "hlavicka" : a.closest("footer") ? "paticka" : a.closest(".contact") ? "kontakt" : "obsah";
+      track("phone_number_clicked", { page: location.pathname, place: where, number: a.getAttribute("href").replace("tel:", "") });
+    }
   });
 
   // Ukázky prací: kliknutí na auto nebo fotku otevře galerii
@@ -29,7 +33,7 @@
     var open = function (key, i) {
       set = Array.prototype.slice.call(document.querySelectorAll('.work-photo[data-gallery="' + key + '"]'));
       if (!set.length) return;
-      show(i || 0); lb.showModal(); track("Galerie", { auto: key });
+      show(i || 0); lb.showModal(); track("gallery_opened", { car: key, page: location.pathname });
     };
     document.addEventListener("click", function (e) {
       var a = e.target.closest && e.target.closest(".work-photo");
@@ -88,6 +92,12 @@
     }
     submit.disabled = true;
     setStatus("Odesílám…");
+    // Záloha poptávky do Umami (odesílá se ještě před Workerem, takže zůstane i při chybě)
+    var cut = function (v) { return String(v || "").trim().slice(0, 500); };
+    track("poptavka_submited", {
+      name: cut(d.name), phone: cut(d.phone), car: cut(d.car), package: cut(d["package"]),
+      place: cut(d.place), page: location.pathname
+    });
     try {
       var r = await fetch("/api/poptavka", {
         method: "POST",
@@ -97,9 +107,10 @@
       if (!r.ok) throw new Error(r.status);
       form.reset();
       conversion("K-dzCKPpnLAdEPCV1I1F");
-      track("Poptávka odeslána");
+      track("poptavka_delivered", { page: location.pathname });
       setStatus("Děkujeme, poptávka odešla. Ozveme se vám co nejdřív.", "ok");
     } catch (err) {
+      track("poptavka_failed", { page: location.pathname, error: String(err && err.message || err) });
       setStatus("Poptávku se nepodařilo odeslat. Zavolejte nám prosím na +420 722 297 759.", "err");
     } finally {
       submit.disabled = false;
