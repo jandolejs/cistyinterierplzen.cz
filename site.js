@@ -5,10 +5,15 @@
     if (typeof window.gtag === "function") window.gtag("event", "conversion", { send_to: ADS + "/" + label });
   }
 
+  // Umami události
+  function track(name, data) {
+    if (window.umami && typeof window.umami.track === "function") window.umami.track(name, data);
+  }
+
   // Konverze: klik na telefon (všechny tel: odkazy)
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest('a[href^="tel:"]');
-    if (a) conversion("8b8lCKbpnLAdEPCV1I1F");
+    if (a) { conversion("8b8lCKbpnLAdEPCV1I1F"); track("Telefon"); }
   });
 
   // Ukázky prací: kliknutí na auto nebo fotku otevře galerii
@@ -24,7 +29,7 @@
     var open = function (key, i) {
       set = Array.prototype.slice.call(document.querySelectorAll('.work-photo[data-gallery="' + key + '"]'));
       if (!set.length) return;
-      show(i || 0); lb.showModal();
+      show(i || 0); lb.showModal(); track("Galerie", { auto: key });
     };
     document.addEventListener("click", function (e) {
       var a = e.target.closest && e.target.closest(".work-photo");
@@ -92,6 +97,7 @@
       if (!r.ok) throw new Error(r.status);
       form.reset();
       conversion("K-dzCKPpnLAdEPCV1I1F");
+      track("Poptávka odeslána");
       setStatus("Děkujeme, poptávka odešla. Ozveme se vám co nejdřív.", "ok");
     } catch (err) {
       setStatus("Poptávku se nepodařilo odeslat. Zavolejte nám prosím na +420 722 297 759.", "err");
