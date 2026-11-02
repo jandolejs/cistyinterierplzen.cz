@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,600..800&family=Figtree:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/site.css?v=3">
+<link rel="stylesheet" href="/site.css?v=4">
 <script defer src="https://umami.jandolejs.cz/script.js" data-website-id="bc774116-2fc9-499b-b918-6035729e1bee"></script>
 </head>
 <body>
@@ -78,8 +78,13 @@
       <div class="row">
         <div class="field"><label for="f-car">Auto</label><input id="f-car" name="car" placeholder="např. Škoda Octavia"></div>
         <div class="field"><label for="f-package">Balíček</label>
-          <select id="f-package" name="package"><option>Komplet – 2 190 Kč</option><option>Základ – 1 290 Kč</option><option>Nevím, poraďte</option></select></div>
+          <select id="f-package" name="package"><option>Komplet – 2 190 Kč</option><option>Základ – 1 290 Kč</option><option>Před prodejem – 2 990 Kč</option><option>Nevím, poraďte</option></select></div>
       </div>
+      <fieldset class="field checks"><legend>Doplňkové služby (nepovinné)</legend>
+        <label><input type="checkbox" name="extras" value="Ozon (+600 Kč)"> Čištění ozonem +600 Kč</label>
+        <label><input type="checkbox" name="extras" value="Ošetření plastů (+300 Kč)"> Ošetření plastů +300 Kč</label>
+        <label><input type="checkbox" name="extras" value="Tekuté stěrače (+500 Kč)"> Tekuté stěrače +500 Kč</label>
+      </fieldset>
       <div class="field"><label for="f-place">Kde auto stojí a kdy se vám to hodí</label><textarea id="f-place" name="place" rows="3" placeholder="Adresa, termín, cokoliv dalšího"></textarea></div>
       <div class="hp" aria-hidden="true"><label for="f-web">Nevyplňujte</label><input id="f-web" name="web" tabindex="-1" autocomplete="off"></div>
       <button class="btn btn-primary" type="submit" id="f-submit">Odeslat poptávku</button>
@@ -121,6 +126,6 @@
   </div>
 </footer>
 
-<script src="/site.js?v=5" defer></script>
+<script src="/site.js?v=6" defer></script>
 </body>
 </html>

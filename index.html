@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,600..800&family=Figtree:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/site.css?v=3">
+<link rel="stylesheet" href="/site.css?v=4">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,7 +43,7 @@
   "image": "https://cistyinterierplzen.cz/og-image.jpg",
   "logo": "https://cistyinterierplzen.cz/apple-touch-icon.png",
   "areaServed": "Plzeň a okolí",
-  "priceRange": "1290–2190 Kč"
+  "priceRange": "1290–2990 Kč"
 }
 </script>
 <script defer src="https://umami.jandolejs.cz/script.js" data-website-id="bc774116-2fc9-499b-b918-6035729e1bee"></script>
@@ -150,6 +150,18 @@
         </ul>
         <p class="time">Trvá 2,5–3 hodiny. Sedačky schnou ještě několik hodin.</p>
       </article>
+      <article class="price">
+        <div class="price-top"><h3>Před prodejem</h3><span class="tag">Ušetříte 600 Kč</span></div>
+        <div class="amount">2 990 <small>Kč</small></div>
+        <ul>
+          <li>Vše z balíčku Komplet včetně tepování sedaček</li>
+          <li>Čištění ozonem – pryč se zápachem</li>
+          <li>Ošetření plastů speciálním přípravkem</li>
+          <li>Tekuté stěrače na čelní sklo</li>
+        </ul>
+        <p class="time">Auto připravené na fotky i prohlídku kupujícím. Trvá 3–3,5 hodiny.</p>
+        <a class="btn btn-outline" href="/objednavka?balicek=pred">Objednat Před prodejem</a>
+      </article>
     </div>
     <div class="extras">
       <table>
@@ -162,6 +174,17 @@
         </tbody>
       </table>
     </div>
+    <div class="extras">
+      <table>
+        <caption>Doplňkové služby</caption>
+        <tbody>
+          <tr><td>Čištění ozonem (zápach z cigaret, zvířat, plísně)</td><td>+ 600 Kč</td></tr>
+          <tr><td>Ošetření plastů speciálním přípravkem</td><td>+ 300 Kč</td></tr>
+          <tr><td>Tekuté stěrače na čelní sklo</td><td>+ 500 Kč</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="loyalty"><strong>Sleva 10 % pro stálé zákazníky:</strong> když si další čištění objednáte do 60 dnů od posledního, dostanete slevu 10 %.</p>
     <p class="note">Čištění exteriéru zatím nenabízíme. Brzy přidáme.</p>
     <p class="more-link"><a href="/cenik">Celý ceník a co ovlivní cenu →</a></p>
   </div>
@@ -290,8 +313,13 @@
       <div class="row">
         <div class="field"><label for="f-car">Auto</label><input id="f-car" name="car" placeholder="např. Škoda Octavia"></div>
         <div class="field"><label for="f-package">Balíček</label>
-          <select id="f-package" name="package"><option>Komplet – 2 190 Kč</option><option>Základ – 1 290 Kč</option><option>Nevím, poraďte</option></select></div>
+          <select id="f-package" name="package"><option>Komplet – 2 190 Kč</option><option>Základ – 1 290 Kč</option><option>Před prodejem – 2 990 Kč</option><option>Nevím, poraďte</option></select></div>
       </div>
+      <fieldset class="field checks"><legend>Doplňkové služby (nepovinné)</legend>
+        <label><input type="checkbox" name="extras" value="Ozon (+600 Kč)"> Čištění ozonem +600 Kč</label>
+        <label><input type="checkbox" name="extras" value="Ošetření plastů (+300 Kč)"> Ošetření plastů +300 Kč</label>
+        <label><input type="checkbox" name="extras" value="Tekuté stěrače (+500 Kč)"> Tekuté stěrače +500 Kč</label>
+      </fieldset>
       <div class="field"><label for="f-place">Kde auto stojí a kdy se vám to hodí</label><textarea id="f-place" name="place" rows="3" placeholder="Adresa, termín, cokoliv dalšího"></textarea></div>
       <div class="hp" aria-hidden="true"><label for="f-web">Nevyplňujte</label><input id="f-web" name="web" tabindex="-1" autocomplete="off"></div>
       <button class="btn btn-primary" type="submit" id="f-submit">Odeslat poptávku</button>
@@ -314,6 +342,6 @@
   <button type="button" class="lb-next" aria-label="Další fotka">›</button>
 </dialog>
 
-<script src="/site.js?v=5" defer></script>
+<script src="/site.js?v=6" defer></script>
 </body>
 </html>

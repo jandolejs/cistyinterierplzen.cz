@@ -108,7 +108,8 @@ section { padding-block: clamp(3rem, 8vw, 5rem); }
 .include p { margin: 0; color: var(--muted); font-size: 0.97rem; }
 
 /* Pricing */
-.prices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.prices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+@media (max-width: 1000px) { .prices { grid-template-columns: minmax(0, 1fr); max-width: 36rem; } }
 .price { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.75rem; display: grid; gap: 1.25rem; align-content: start; }
 .price.featured { border: 2px solid var(--accent); }
 .price-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
@@ -131,6 +132,11 @@ section { padding-block: clamp(3rem, 8vw, 5rem); }
 .extras td:last-child { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .note { color: var(--muted); font-size: 0.92rem; margin: 1rem 0 0; }
 .more-link { margin: 1.5rem 0 0; font-weight: 600; }
+.loyalty { margin: 1.25rem 0 0; padding: 1rem 1.25rem; border-radius: 12px; border: 2px dashed var(--accent); background: var(--surface); }
+.checks { border: 0; padding: 0; margin: 0; }
+.checks legend { font-size: 0.85rem; font-weight: 600; color: var(--band-muted); margin-bottom: 0.35rem; padding: 0; }
+.checks label { display: flex; align-items: center; gap: 0.55rem; color: #eef3f4; font-size: 0.95rem; font-weight: 400; padding: 0.2rem 0; cursor: pointer; }
+.field.checks input { width: 1.1rem; height: 1.1rem; padding: 0; flex: none; margin: 0; accent-color: var(--signal); }
 
 /* Info cards (subpages) */
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }

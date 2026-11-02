@@ -79,7 +79,10 @@
   /* Poptávka se posílá na Cloudflare Worker (/api/poptavka), který ji přepošle do Telegramu. */
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
-    var d = Object.fromEntries(new FormData(form));
+    var fd = new FormData(form);
+    var d = Object.fromEntries(fd);
+    d.extras = fd.getAll("extras").join(", ");
+    if (d.extras) d.place = "Doplňky: " + d.extras + (d.place ? "\n" + d.place : "");
     if (d.web) return; // spam bot
     var name = form.elements.name, phone = form.elements.phone;
     var nameOk = !!d.name.trim(), phoneOk = d.phone.replace(/\D/g, "").length >= 9;
@@ -95,7 +98,7 @@
     // Záloha poptávky do Umami (odesílá se ještě před Workerem, takže zůstane i při chybě)
     var cut = function (v) { return String(v || "").trim().slice(0, 500); };
     track("poptavka_submited", {
-      name: cut(d.name), phone: cut(d.phone), car: cut(d.car), package: cut(d["package"]),
+      name: cut(d.name), phone: cut(d.phone), car: cut(d.car), package: cut(d["package"]), extras: cut(d.extras),
       place: cut(d.place), page: location.pathname
     });
     try {
